@@ -1,12 +1,25 @@
 const express = require("express");
+const mongoose = require('mongoose');
+const userRoutes = require('./userRoutes');
 const app = express();
+const port = process.env.port || 3000;
 
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://cluster0.g4o9h.mongodb.net/myDatabase?retryWrites=true&w=majority')
+  .then(() => {
+    console.log('Connected to MongoDB successfully!');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 app.get('/', (req, res) => {
   res.send('Weolcome to the home page!');
 });
 
-const port = process.env.port || 3000
+// Use userRoutes
+app.use('/users', userRoutes);
+
 app.listen(port, () => {
   console.log("Server runs on port:", port);
 });
