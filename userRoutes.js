@@ -6,8 +6,7 @@ const router = express.Router();
 // Example route to create a new user
 router.post('/create-user', async (req, res) => {
   try {
-    const newUser = new User({ ...req.body });
-    await newUser.save();
+    const newUser = await User.create({ ...req.body });
     res.send('User created successfully!');
   } catch (error) {
     console.error(error);
