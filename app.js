@@ -16,6 +16,7 @@ mongoose.connect('mongodb+srv://aviran:304715840@cluster0.g4o9h.mongodb.net/test
 app.get('/', (req, res) => {
   res.send('Weolcome to the home page!');
 });
+app.use(express.json()); // Parse JSON request bodies
 
 // Use userRoutes
 app.use('/users', userRoutes);
