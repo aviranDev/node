@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.port || 3000;
 
 if (process.argv[2] === '--production') {
-  mongoose.connect('mongodb+srv://aviran:304715840@cluster0.g4o9h.mongodb.net/testDb?retryWrites=true&w=majority')
+  mongoose.connect('mongodb+srv://aviran:304715840@cluster0.g4o9h.mongodb.net/testDb1?retryWrites=true&w=majority')
     .then(() => {
       console.log('Connected to MongoDB successfully!');
     })
