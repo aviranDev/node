@@ -4,14 +4,17 @@ const userRoutes = require('./userRoutes');
 const app = express();
 const port = process.env.port || 3000;
 
-// Connect to MongoDB
-mongoose.connect('')
-  .then(() => {
-    console.log('Connected to MongoDB successfully!');
-  })
-  .catch((err) => {
-    console.error('Error connecting to MongoDB:', err);
-  });
+if (process.argv[2] === '--production') {
+  mongoose.connect('mongodb+srv://aviran:304715840@cluster0.g4o9h.mongodb.net/testDb?retryWrites=true&w=majority')
+    .then(() => {
+      console.log('Connected to MongoDB successfully!');
+    })
+    .catch((err) => {
+      console.error('Error connecting to MongoDB:', err);
+    });
+} else {
+  console.log('MongoDB connection skipped in non-production environment.');
+}
 
 app.get('/', (req, res) => {
   res.send('Weolcome to the home page!');
