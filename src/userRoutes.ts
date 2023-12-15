@@ -1,11 +1,12 @@
-const express = require('express');
-const User = require('./model');
+import express from 'express';
+import User from './model';
 
 const router = express.Router();
 
 // Example route to create a new user
 router.post('/create-user', async (req, res) => {
   try {
+    console.log(req.body);
     await User.create(req.body);
     res.send('User created successfully!');
   } catch (error) {
@@ -25,4 +26,4 @@ router.get('/all-users', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
