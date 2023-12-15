@@ -14,4 +14,15 @@ router.post('/create-user', async (req, res) => {
   }
 });
 
+router.get('/all-users', async (req, res) => {
+  try {
+    const users = await User.find({});
+    console.log(users);
+    res.send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error creating user');
+  }
+});
+
 module.exports = router;
