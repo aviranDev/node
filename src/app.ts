@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import userRoutes from './userRoutes';
 import dotenv from "dotenv";
+import { atlas_uri } from "./config/mongo";
 dotenv.config();
 
 const app = express();
 const port = process.env.port || 3000;
 
 if (process.argv[2] === '--production') {
-  mongoose.connect(process.env.mongoDbAtals)
+  mongoose.connect(atlas_uri)
     .then(() => {
       console.log('Connected to MongoDB atals successfully!');
     })
