@@ -30,7 +30,7 @@ if (process.argv[2] === '--production') {
 }
 
 app.get('/', (req, res) => {
-  res.send('Weolcome to the home page! test!');
+  res.send('Weolcome to the home page!');
 });
 app.use(express.json()); // Parse JSON request bodies
 app.use(morgan('dev')); // Parse JSON request bodies
