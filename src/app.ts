@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import userRoutes from './userRoutes';
 import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
+import morgan from 'morgan';
 dotenv.config();
 
 const app = express();
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
   res.send('Weolcome to the home page! test!');
 });
 app.use(express.json()); // Parse JSON request bodies
+app.use(morgan('dev')); // Parse JSON request bodies
 
 // Use userRoutes
 app.use('/users', userRoutes);
