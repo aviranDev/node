@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import userRoutes from './userRoutes';
+import userRoutes from './routes/users';
 import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
 import morgan from 'morgan';
