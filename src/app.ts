@@ -10,6 +10,8 @@ dotenv.config();
 //test
 //test
 //test
+const number = 5;
+
 const app = express();
 const port = process.env.port || 3000;
 //test
