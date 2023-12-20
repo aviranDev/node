@@ -1,9 +1,11 @@
-import express from 'express';
-import User from './model';
+import { Router } from "express";
+import User from '../models/User';
+import controller from "../controllers/users";
 
-const router = express.Router();
+const router = Router();
 
 // Example route to create a new user
+
 router.post('/create-user', async (req, res) => {
   try {
     await User.create(req.body);
@@ -12,6 +14,8 @@ router.post('/create-user', async (req, res) => {
     res.status(500).send('Error creating user');
   }
 });
+
+router.post('/register', controller.addMember);
 
 // Example route to create a new user
 router.delete('/remove-user/:id', async (req, res) => {
