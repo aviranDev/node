@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import userRoutes from './userRoutes';
+import userRoutes from './routes/users';
 import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
 import morgan from 'morgan';
@@ -15,8 +15,12 @@ const number2 = 5;
 const number3 = 5;
 
 const app = express();
+
 const port = process.env.port || 3000;
-//test
+
+const port = process.env.PORT || 3000;
+
+ main
 if (process.argv[2] === '--production') {
   mongoose.connect(atlas_uri)
     .then(() => {
@@ -38,7 +42,7 @@ if (process.argv[2] === '--production') {
 }
 
 app.get('/', (req, res) => {
-  res.send('Weolcome to the home page! test!');
+  res.send('Weolcome to the home page!');
 });
 app.use(express.json()); // Parse JSON request bodies
 app.use(morgan('dev')); // Parse JSON request bodies
