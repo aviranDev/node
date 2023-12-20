@@ -5,17 +5,9 @@ import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
 import morgan from 'morgan';
 dotenv.config();
-//test
-//test
-//test
-//test
-//test
-const number = 5;
-const number2 = 5;
-const number3 = 5;
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 //test
 if (process.argv[2] === '--production') {
   mongoose.connect(atlas_uri)
