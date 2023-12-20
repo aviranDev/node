@@ -7,6 +7,7 @@ import morgan from 'morgan';
 dotenv.config();
 
 const app = express();
+const number = 5;
 const port = process.env.PORT || 3000;
 //test
 if (process.argv[2] === '--production') {
