@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
 import morgan from 'morgan';
 dotenv.config();
-
+//test
 const app = express();
 const port = process.env.port || 3000;
 //test
