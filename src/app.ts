@@ -4,6 +4,8 @@ import userRoutes from './routes/users';
 import dotenv from "dotenv";
 import { atlas_uri } from "./config/mongo";
 import morgan from 'morgan';
+import { errorHandler } from "./errors/errorHandler";
+
 dotenv.config();
 
 const app = express();
@@ -38,6 +40,8 @@ app.use(morgan('dev')); // Parse JSON request bodies
 
 // Use userRoutes
 app.use('/users', userRoutes);
+app.use(errorHandler);
+
 
 app.listen(port, () => {
   console.log("Server runs on port:", port);

@@ -4,17 +4,6 @@ import controller from "../controllers/users";
 
 const router = Router();
 
-// Example route to create a new user
-
-router.post('/create-user', async (req, res) => {
-  try {
-    await User.create(req.body);
-    res.send('User created successfully!');
-  } catch (error) {
-    res.status(500).send('Error creating user');
-  }
-});
-
 router.post('/register', controller.addMember);
 
 // Example route to create a new user
