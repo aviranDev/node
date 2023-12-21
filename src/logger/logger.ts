@@ -1,14 +1,5 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import path from 'path';
-import fs from 'fs';
-
-const logsDir = process.env.LOGS_DIR || '/logs/';
-
-// Ensure the log directory exists or create it
-if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir);
-}
 
 // Define log levels with associated numeric values
 const levels = {
@@ -45,46 +36,31 @@ const format = winston.format.combine(
   winston.format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
 );
 
-// Check if the file system is writable
-const isWritableFileSystem = () => {
-  try {
-    // Attempt to create a temporary directory to check if the file system is writable
-    fs.mkdirSync(path.join(logsDir, 'test'));
-    fs.rmdirSync(path.join(logsDir, 'test'));
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+// Create transports for log files
+const logTransport = [
+  // Output log messages to the console for immediate visibility
+  new winston.transports.Console(),
 
-// Create transports for log files based on the file system writability
-const logTransport = isWritableFileSystem()
-  ? [
-    // Output log messages to the console for immediate visibility
-    new winston.transports.Console(),
+  // Implement daily log rotation for error logs
+  new DailyRotateFile({
+    level: 'error',
+    filename: 'logs/error-%DATE%.log',
+    datePattern: 'YYYY-MM-DD',
+    zippedArchive: true,
+    maxSize: '20m',
+    maxFiles: '14d', // Keep logs for 14 days
+  }),
 
-    // Implement daily log rotation for error logs
-    new DailyRotateFile({
-      level: 'error',
-      filename: path.join(logsDir, 'error-%DATE%.log'),
-      datePattern: 'YYYY-MM-DD',
-      zippedArchive: true,
-      maxSize: '20m',
-      maxFiles: '14d',
-    }),
+  // Implement daily log rotation for all logs (including errors)
+  new DailyRotateFile({
+    filename: 'logs/all-%DATE%.log',
+    datePattern: 'YYYY-MM-DD',
+    zippedArchive: true,
+    maxSize: '20m',
+    maxFiles: '14d',
+  }),
+];
 
-    // Implement daily log rotation for all logs (including errors)
-    new DailyRotateFile({
-      filename: path.join(logsDir, 'all-%DATE%.log'),
-      datePattern: 'YYYY-MM-DD',
-      zippedArchive: true,
-      maxSize: '20m',
-      maxFiles: '14d',
-    }),
-  ]
-  : [
-    // Use your DailyRotateFile or other transports for a writable file system
-  ];
 
 // Create a logger instance with specified configuration
 const logger = winston.createLogger({
