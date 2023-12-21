@@ -1,6 +1,14 @@
 import winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import path from 'path';
+import fs from 'fs';
+
+const logsDir = '/tmp/logs/';
+
+// Ensure the log directory exists or create it
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir);
+}
 
 // Define log levels with associated numeric values
 const levels = {
@@ -37,11 +45,9 @@ const format = winston.format.combine(
   winston.format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)
 );
 
-// Create transports for log files
-const logsDir = path.join(__dirname, 'logs'); // Use an absolute path
 const logTransport = [
   // Output log messages to the console for immediate visibility
-  new winston.transports.Console({ format }),
+  new winston.transports.Console(),
 
   // Implement daily log rotation for error logs
   new DailyRotateFile({
@@ -50,7 +56,7 @@ const logTransport = [
     datePattern: 'YYYY-MM-DD',
     zippedArchive: true,
     maxSize: '20m',
-    maxFiles: '14d', // Keep logs for 14 days
+    maxFiles: '14d',
   }),
 
   // Implement daily log rotation for all logs (including errors)
