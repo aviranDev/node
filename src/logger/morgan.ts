@@ -1,5 +1,5 @@
 import morgan from 'morgan';
-import logger from './logger';
+import { logger } from './logger';
 
 // Create a stream for Morgan to write log messages using the logger
 const stream = {
