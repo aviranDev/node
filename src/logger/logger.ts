@@ -1,4 +1,5 @@
 import { createLogger, format, transports, addColors } from 'winston';
+const isProduction = process.argv[2] === '--production';
 
 // Define custom colors
 const customColors = {
@@ -11,20 +12,13 @@ const customColors = {
 // Set custom colors
 addColors(customColors);
 
-// Create a logger with a custom format
 const logger = createLogger({
-  format: format.combine(
-    format.timestamp(),
-    format.colorize({ all: true }),
-    format.printf(({ level, message, timestamp }) => {
-      return `${timestamp} ${level.toUpperCase()} ${message}`;
-    })
-  ),
+  // ... other configurations ...
   transports: [
-    new transports.Console({
-      level: 'debug'
-    })
-  ],
+    new transports.Console({ level: isProduction ? 'info' : 'debug' }),
+    isProduction ? null : new transports.File({ filename: 'logs/api.log', level: 'info' }),
+    isProduction ? null : new transports.File({ filename: 'logs/error.log', level: 'error' }),
+  ].filter(Boolean),
 });
 
 export { logger };
