@@ -1,4 +1,4 @@
-/* import { createLogger, format, transports, addColors } from 'winston';
+import { createLogger, format, transports, addColors } from 'winston';
 const isProduction = process.argv[2] === '--production';
 
 // Define custom colors
@@ -21,4 +21,4 @@ const logger = createLogger({
   ].filter(Boolean),
 });
 
-export { logger }; */
+export { logger }; 

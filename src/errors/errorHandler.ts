@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-// import { logger } from '../logger/logger';
+import { logger } from '../logger/logger';
 
 /**
  * Error handling middleware responsible for logging errors and sending appropriate responses.
@@ -13,7 +13,7 @@ import { Request, Response, NextFunction } from 'express';
 const errorHandler = function (err: Error, req: Request, res: Response, next: NextFunction): void {
   try {
     // Handle Resource Not Found (404) Error
-    // logger.error(err.message);
+    logger.error(err.message);
 
     // Respond with the appropriate status code, message, and error details
     res.status(500).json({
