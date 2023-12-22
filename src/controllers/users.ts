@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { IUser } from "../models/User";
 import UserService from "../services/users";
-import logger from "../logger/logger";
+import { logger } from '../logger/logger';
 
 class UserController {
   // Declare an instance of UserService as a property
@@ -40,7 +40,7 @@ class UserController {
       // Handle errors by passing them to the next middleware.
       next(error);
     } finally {
-      logger.error("this is an error")
+      logger.info('yes')
     }
   };
 };
