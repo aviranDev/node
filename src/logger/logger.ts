@@ -15,12 +15,12 @@ addColors(customColors);
 const logger = createLogger({
   format: format.combine(
     format.timestamp(),
-    format.colorize({ all: true }), // Add colors to all log levels
-    format.simple() // This is not strictly necessary
+    format.colorize({ all: true }),
+    format.printf(({ level, message, timestamp }) => {
+      return `${timestamp} ${level.toUpperCase()} ${message}`;
+    })
   ),
   transports: [
-    new transports.File({ filename: 'logs/api.log', level: 'info' }),
-    new transports.File({ filename: 'logs/error.log', level: 'error' }),
     new transports.Console({
       level: 'debug'
     })
