@@ -1,4 +1,4 @@
-import morgan from 'morgan';
+/* import morgan from 'morgan';
 import { logger } from './logger';
 
 // Create a stream for Morgan to write log messages using the logger
@@ -23,4 +23,4 @@ const skip = () => {
 // Create a Morgan middleware with the 'dev' format
 const morganMiddleware = morgan('dev', { stream, skip });
 
-export default morganMiddleware;
+export default morganMiddleware; */
